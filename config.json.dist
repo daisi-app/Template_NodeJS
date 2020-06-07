@@ -1,8 +1,10 @@
 {
-    "applicationName": "Template",
-    
-    "server": {
-        "ip": "localhost",
-        "port": 8080
+    "port": 8080,
+
+    "log": {
+        "appenders": {
+            "console": { "type": "console", "layout": { "type": "pattern", "pattern": "%d{dd/MM/yyyy-hh:mm:ss} [%p] %c: %m" } }
+        },
+        "categories": { "default": { "appenders": ["console"], "level": "debug" } }
     }
 }
