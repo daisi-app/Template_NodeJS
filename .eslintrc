@@ -8,9 +8,6 @@
 		"ecmaVersion": 2020
 	},
 	"rules": {
-		// New best practices
-		"quotes": ["error", "double"],
-		"prefer-template": "error",
-		"curly": ["error", "multi", "consistent"]
+		"prefer-template": "error"
 	}
 }

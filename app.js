@@ -1,31 +1,58 @@
 'use strict';
 const app = require('express')();
 const bodyParser = require('body-parser');
-const helmet = reuqire('helmet');
-const config = require('./config');
+const helmet = require('helmet');
+const log4js = require('log4js');
+const config = require('./config.json');
 
-console.log('/ *************** Server Start *************** \\');
-const serverPort = config.server.port || 8080;
-console.log(`Starting server on port ${serverPort} ...`);
+const logger = log4js.getLogger('Starting');
 
-// Initialisations
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(helmet());
+/**
+ * Modules initialization
+ */
+async function init() {
+	log4js.configure(config.log);
+}
 
-app.get('/health', (req, res) => res.sendStatus(200));
+/**
+ * Declare all express routes
+ */
+function routes() {
+   // Initialisations
+   app.use(bodyParser.json());
+   app.use(bodyParser.urlencoded({ extended: true }));
+   app.use(helmet());
 
-// Services Implementations
-app.use('/api', require('./src/routes'));
+   app.get('/health', (req, res) => res.sendStatus(200));
 
-// Error 404
-app.use((req, res) => res.sendStatus(404));
+   // Services Implementations
+   app.use('/api', require('./src/routes'));
 
-// Other errors
-app.use((err, req, res, next) => res.sendStatus(500));
+   // Error 404
+   app.use((req, res) => res.sendStatus(404));
 
-// Server Start with the port in config file
-app.listen(serverPort, async () => {
-    console.log('Server started');
-    console.log('***************************************************************');
-});
+   // Other errors
+   app.use((err, req, res) => res.sendStatus(500));
+}
+
+/**
+ * Global function to start nodeJS server
+ */
+async function main() {
+    // Modules initialization
+	await init();
+
+	// Routes declaration
+	routes();
+
+    // Server Start with the port in config file
+	app.listen(config.port, () => {
+		logger.info(`Server started on port ${config.port}`);
+	});
+}
+
+main()
+    .catch(err => {
+		logger.error(`Une erreur est survenue lors du démarrage du server : ${err.message}`);
+		logger.debug(err);
+    });
