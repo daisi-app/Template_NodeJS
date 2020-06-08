@@ -1,0 +1,8 @@
+# Directories
+.git
+
+# Files
+.editorconfig
+.eslint
+.gitignore
+config.json.dist
