@@ -1,9 +1,11 @@
-'use strict';
-const app = require('express')();
-const bodyParser = require('body-parser');
-const helmet = require('helmet');
-const log4js = require('log4js');
-const config = require('./config.json');
+import express, {Request, Response} from 'express';
+import bodyParser from 'body-parser';
+import helmet from 'helmet';
+import log4js from 'log4js';
+import * as config from '../config.json';
+import apiroutes from './routes/index';
+
+const app = express();
 
 const logger = log4js.getLogger('Starting');
 
@@ -23,16 +25,16 @@ function routes() {
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(helmet());
 
-	app.get('/health', (req, res) => res.sendStatus(200));
+	app.get('/health', (req: Request, res: Response) => res.sendStatus(200));
 
 	// Services Implementations
-	app.use('/api', require('./src/routes'));
+	app.use('/api', apiroutes);
 
 	// Error 404
-	app.use((req, res) => res.sendStatus(404));
+	app.use((req: Request, res: Response) => res.sendStatus(404));
 
 	// Other errors
-	app.use((err, req, res) => res.sendStatus(500));
+	app.use((err: Error, req: Request, res: Response) => res.sendStatus(500));
 }
 
 /**

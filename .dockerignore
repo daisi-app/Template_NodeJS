@@ -1,8 +1,10 @@
 # Directories
 .git
+src
 
 # Files
 .editorconfig
-.eslint
+.eslint.json
 .gitignore
 config.json.dist
+tsconfig.json
