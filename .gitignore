@@ -1,5 +1,6 @@
 # Directories
-node_modules
+build/
+node_modules/
 
 # Files
 config.json
