@@ -10,7 +10,6 @@
 	"rules": {
 		"eol-last": ["error", "always"],
 		"no-console": "error",
-		"prefer-template": "error",
-		"quotes": ["error", "single"]
+		"prefer-template": "error"
 	}
 }
