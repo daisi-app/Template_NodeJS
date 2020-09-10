@@ -25,6 +25,7 @@
   "scripts": {
     "dev": "ts-node-dev src/app",
     "start": "tsc && node ./build/src/app",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "jest --collectCoverage"
   }
 }
