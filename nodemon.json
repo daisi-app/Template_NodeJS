@@ -1,0 +1,7 @@
+{
+  "verbose": false,
+  "watch": ["src"],
+  "ext": "ts, json",
+  "ignore": ["src/**/*.spec.ts", "build"],
+  "exec": "tsc && node ./build/src/app"
+}

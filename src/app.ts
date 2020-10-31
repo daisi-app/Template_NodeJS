@@ -48,8 +48,9 @@ async function main() {
 	routes();
 
 	// Server Start with the port in config file
-	app.listen(config.port, () => {
-		logger.info(`Server started on port ${config.port}`);
+	const port = process.env.PORT || 8080;
+	app.listen(port, () => {
+		logger.info(`Server started on port ${port}`);
 	});
 }
 
