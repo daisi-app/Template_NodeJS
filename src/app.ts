@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import log4js from 'log4js';
 import * as config from '../config.json';
-import apiroutes from './routes/index';
+import apiroutes from 'routes/index';
 
 const app = express();
 
